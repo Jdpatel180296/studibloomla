@@ -1,11 +1,1096 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=studiobloom-05-06-26.html">
-  <title>Redirecting…</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudioBloom Industrial Solutions — B&W Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #000000;
+    --white: #ffffff;
+    --gray: #111111;
+    --mid: #1a1a1a;
+    --mid2: #222222;
+    --light-gray: #888888;
+    --green: #ffd600;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CURSOR */
+  .cursor {
+    position: fixed; width: 12px; height: 12px;
+    background: white; border-radius: 0; pointer-events: none;
+    z-index: 9999; transform: translate(-50%,-50%);
+    transition: width .15s, height .15s; mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed; width: 40px; height: 40px;
+    border: 1px solid rgba(255,255,255,.5); border-radius: 0;
+    pointer-events: none; z-index: 9998; transform: translate(-50%,-50%);
+    transition: width .2s, height .2s; mix-blend-mode: difference;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 60px;
+    background: rgba(0,0,0,.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .nav-logo-box {
+    height: 44px; display: flex; align-items: center;
+  }
+  .nav-logo-box img { height: 44px; width: auto; display: block; }
+  .nav-wordmark { display:flex; flex-direction:column; line-height:1; }
+  .nav-wordmark strong { font-size:13px; font-weight:700; letter-spacing:.14em; color:white; }
+  .nav-wordmark small { font-size:8px; letter-spacing:.25em; color:var(--light-gray); font-weight:400; }
+  .nav-links { display:flex; gap:36px; list-style:none; }
+  .nav-links a { color:var(--light-gray); text-decoration:none; font-size:10px; letter-spacing:.2em; font-weight:600; text-transform:uppercase; transition:color .2s; }
+  .nav-links a:hover { color:white; }
+  .nav-cta { background:white; color:black !important; padding:10px 22px; font-size:10px !important; letter-spacing:.2em; font-weight:700 !important; text-transform:uppercase; text-decoration:none; transition: background .2s, color .2s !important; }
+  .nav-cta:hover { background:black !important; color:white !important; outline:1px solid white; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display:flex; flex-direction:column;
+    justify-content:flex-end; padding: 0 60px 80px;
+    position:relative; overflow:hidden;
+  }
+  .hero-grid {
+    position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(255,255,255,.025) 79px,rgba(255,255,255,.025) 80px),
+      repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(255,255,255,.025) 79px,rgba(255,255,255,.025) 80px);
+  }
+  .hero-ticker {
+    position:absolute; top:50%; left:0; right:0;
+    transform:translateY(-50%); white-space:nowrap;
+    overflow:hidden; opacity:.035; pointer-events:none;
+  }
+  .hero-ticker-inner {
+    display:inline-block; animation:ticker 35s linear infinite;
+    font-family:'Space Mono',monospace;
+    font-size:clamp(70px,11vw,160px); font-weight:700; letter-spacing:-.02em; color:white;
+  }
+  @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  .hero-eyebrow {
+    font-size:10px; letter-spacing:.35em; color:var(--light-gray);
+    text-transform:uppercase; font-weight:600; margin-bottom:22px;
+    opacity:0; animation:fadeUp .8s .3s forwards;
+    display:flex; align-items:center; gap:14px;
+  }
+  .hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--light-gray); }
+  .pill { background:var(--green); color:black; padding:3px 10px; font-size:8px; letter-spacing:.2em; font-weight:700; }
+
+  .hero-headline {
+    font-size:clamp(50px,7.5vw,116px); font-weight:900;
+    line-height:.88; letter-spacing:-.04em; text-transform:uppercase;
+    max-width:950px; opacity:0; animation:fadeUp .8s .5s forwards;
+  }
+  .hero-headline em { font-style:normal; -webkit-text-stroke:1.5px white; color:transparent; }
+  .green { color:var(--green); }
+
+  .hero-sub {
+    margin-top:36px; max-width:500px; font-size:14px; line-height:1.8;
+    color:var(--light-gray); font-weight:300;
+    opacity:0; animation:fadeUp .8s .7s forwards;
+  }
+  .hero-actions {
+    margin-top:44px; display:flex; gap:20px; align-items:center;
+    opacity:0; animation:fadeUp .8s .9s forwards;
+  }
+  .btn-primary {
+    background:white; color:black; padding:15px 38px;
+    font-size:10px; letter-spacing:.25em; font-weight:700;
+    text-transform:uppercase; text-decoration:none;
+    transition:all .2s; font-family:'Poppins',sans-serif; border:none; cursor:none;
+  }
+  .btn-primary:hover { background:transparent; color:white; outline:1px solid white; }
+  .btn-ghost {
+    color:var(--light-gray); font-size:10px; letter-spacing:.2em; font-weight:600;
+    text-transform:uppercase; text-decoration:none;
+    display:flex; align-items:center; gap:10px; transition:color .2s;
+    font-family:'Poppins',sans-serif;
+  }
+  .btn-ghost::after { content:'→'; transition:transform .2s; }
+  .btn-ghost:hover { color:white; }
+  .btn-ghost:hover::after { transform:translateX(4px); }
+
+  .hero-stats {
+    position:absolute; right:60px; bottom:80px;
+    display:flex; flex-direction:column; gap:28px;
+    opacity:0; animation:fadeUp .8s 1.1s forwards;
+  }
+  .hero-stat { text-align:right; }
+  .hero-stat-num { font-size:34px; font-weight:900; letter-spacing:-.02em; line-height:1; }
+  .hero-stat-label { font-size:9px; letter-spacing:.25em; color:var(--light-gray); text-transform:uppercase; margin-top:3px; font-weight:600; }
+
+  .scroll-indicator {
+    position:absolute; bottom:0; left:50%; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center;
+    opacity:0; animation:fadeUp .8s 1.4s forwards;
+  }
+  .scroll-text { font-size:8px; letter-spacing:.3em; color:var(--light-gray); text-transform:uppercase; font-weight:600; writing-mode:vertical-rl; transform:rotate(180deg); height:48px; display:flex; align-items:center; }
+  .scroll-bar { width:1px; height:50px; background:rgba(255,255,255,.12); position:relative; overflow:hidden; }
+  .scroll-bar::after { content:''; position:absolute; top:-100%; left:0; width:100%; height:100%; background:white; animation:scrollPulse 2s 1.5s infinite; }
+  @keyframes scrollPulse { 0%{top:-100%} 100%{top:100%} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+  /* MARQUEE */
+  .marquee-strip { background:white; color:black; padding:14px 0; overflow:hidden; white-space:nowrap; }
+  .marquee-inner { display:inline-block; animation:marquee 22s linear infinite; font-size:10px; letter-spacing:.3em; font-weight:700; text-transform:uppercase; font-family:'Space Mono',monospace; }
+  .marquee-inner span { margin:0 36px; }
+  .mdot { opacity:.3; }
+  @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* SHARED */
+  section { padding:120px 60px; }
+  .section-label { font-size:9px; letter-spacing:.4em; color:var(--light-gray); text-transform:uppercase; font-weight:600; margin-bottom:14px; display:flex; align-items:center; gap:14px; }
+  .section-label::before { content:''; width:28px; height:1px; background:var(--light-gray); flex-shrink:0; }
+  .section-title { font-size:clamp(34px,4.5vw,62px); font-weight:900; letter-spacing:-.03em; text-transform:uppercase; line-height:.92; max-width:700px; }
+  .section-title em { font-style:normal; -webkit-text-stroke:1px white; color:transparent; }
+
+  .reveal { opacity:0; transform:translateY(36px); transition: opacity .8s cubic-bezier(.25,.46,.45,.94), transform .8s cubic-bezier(.25,.46,.45,.94); }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+  .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s}
+
+  /* PLATFORM INTRO */
+  .platform-intro { background:var(--gray); border-top:1px solid rgba(255,255,255,.07); }
+  .platform-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-top:72px; align-items:start; }
+  .platform-text p { font-size:14px; line-height:1.85; color:var(--light-gray); font-weight:300; margin-top:28px; }
+  .platform-badge { display:inline-flex; align-items:center; gap:10px; background:var(--mid2); border:1px solid rgba(255,255,255,.1); padding:10px 18px; margin-top:32px; }
+  .platform-badge-dot { width:8px; height:8px; background:var(--green); flex-shrink:0; }
+  .platform-badge span { font-size:10px; letter-spacing:.2em; font-weight:700; text-transform:uppercase; }
+  .platform-steps { background:var(--mid2); border:1px solid rgba(255,255,255,.08); padding:40px; display:flex; flex-direction:column; gap:0; }
+  .platform-steps h3 { font-size:11px; letter-spacing:.25em; text-transform:uppercase; font-weight:700; color:var(--light-gray); margin-bottom:24px; }
+  .astep { display:flex; gap:16px; align-items:flex-start; padding:20px 0; border-bottom:1px solid rgba(255,255,255,.06); }
+  .astep:last-child { border-bottom:none; padding-bottom:0; }
+  .astep-num { font-family:'Space Mono',monospace; font-size:10px; color:var(--green); width:24px; flex-shrink:0; padding-top:2px; }
+  .astep-body strong { font-size:13px; font-weight:700; display:block; margin-bottom:4px; }
+  .astep-body span { font-size:12px; color:var(--light-gray); font-weight:300; line-height:1.5; }
+
+  /* TECH LINES */
+  .tech-lines { background:var(--black); border-top:1px solid rgba(255,255,255,.07); }
+  .lines-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:72px; }
+  .line-card { background:var(--gray); border:1px solid rgba(255,255,255,.06); padding:40px 32px; position:relative; overflow:hidden; transition:background .25s; }
+  .line-card:hover { background:var(--mid); }
+  .line-card::after { content:''; position:absolute; bottom:0; left:0; height:2px; width:0; background:var(--green); transition:width .35s; }
+  .line-card:hover::after { width:100%; }
+  .line-num { font-family:'Space Mono',monospace; font-size:10px; color:var(--green); letter-spacing:.1em; margin-bottom:20px; }
+  .line-icon { font-size:28px; margin-bottom:20px; }
+  .line-title { font-size:15px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; line-height:1.2; margin-bottom:16px; }
+  .line-items { list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .line-items li { font-size:11px; color:var(--light-gray); font-weight:300; line-height:1.4; display:flex; gap:10px; align-items:flex-start; }
+  .line-items li::before { content:'—'; color:rgba(255,255,255,.2); flex-shrink:0; }
+
+  /* BIOCONTROLLERS */
+  .biocontrol { background:var(--black); border-top:3px solid var(--green); position:relative; overflow:hidden; }
+  .bio-glow { position:absolute; top:-200px; left:50%; transform:translateX(-50%); width:700px; height:700px; border-radius:50%; background:radial-gradient(circle,rgba(255,214,0,.07) 0%,transparent 70%); pointer-events:none; }
+  .bio-layout { display:grid; grid-template-columns:1fr 1fr; gap:100px; margin-top:72px; align-items:center; }
+  .bio-visual { position:relative; display:flex; align-items:center; justify-content:center; height:480px; }
+  .bio-rings { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+  .bio-ring { position:absolute; border-radius:50%; border:1px solid rgba(255,214,0,.25); animation:expandRing 4s ease-out infinite; }
+  .bio-ring:nth-child(1){ width:120px; height:120px; animation-delay:0s; }
+  .bio-ring:nth-child(2){ width:240px; height:240px; animation-delay:1s; }
+  .bio-ring:nth-child(3){ width:360px; height:360px; animation-delay:2s; }
+  .bio-ring:nth-child(4){ width:460px; height:460px; animation-delay:3s; }
+  @keyframes expandRing { 0%{opacity:.7;transform:scale(.85)} 100%{opacity:0;transform:scale(1.05)} }
+  .bio-center { position:relative; z-index:2; width:160px; height:160px; background:var(--green); display:flex; align-items:center; justify-content:center; flex-direction:column; }
+  .bio-center-icon { font-size:40px; }
+  .bio-center-label { font-size:8px; letter-spacing:.2em; font-weight:700; text-transform:uppercase; color:black; margin-top:6px; text-align:center; }
+  .bio-tag { display:inline-flex; align-items:center; gap:8px; background:var(--green); color:black; padding:5px 14px; font-size:8px; letter-spacing:.25em; font-weight:700; text-transform:uppercase; margin-bottom:28px; }
+  .bio-title { font-size:clamp(32px,3.8vw,54px); font-weight:900; letter-spacing:-.03em; text-transform:uppercase; line-height:.92; margin-bottom:24px; }
+  .bio-title em { font-style:normal; -webkit-text-stroke:1px white; color:transparent; }
+  .bio-desc { font-size:14px; line-height:1.8; color:var(--light-gray); font-weight:300; margin-bottom:40px; }
+  .bio-features { display:flex; flex-direction:column; gap:2px; }
+  .bio-feat { display:flex; gap:16px; align-items:flex-start; padding:20px; background:var(--gray); border:1px solid rgba(255,255,255,.07); transition:background .2s, border-color .2s; }
+  .bio-feat:hover { background:var(--mid); border-color:rgba(255,214,0,.3); }
+  .bio-feat-icon { width:36px; height:36px; background:var(--green); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .bio-feat-text strong { font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; display:block; margin-bottom:4px; }
+  .bio-feat-text span { font-size:11px; color:var(--light-gray); font-weight:300; line-height:1.5; }
+
+  /* BIZ MODELS */
+  .biz-models { background:var(--gray); border-top:1px solid rgba(255,255,255,.07); }
+  .biz-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; margin-top:72px; }
+  .biz-card { background:var(--mid); border:1px solid rgba(255,255,255,.06); padding:44px 36px; position:relative; overflow:hidden; transition:background .25s; }
+  .biz-card:hover { background:var(--mid2); }
+  .biz-num { font-family:'Space Mono',monospace; font-size:10px; color:var(--light-gray); margin-bottom:24px; letter-spacing:.1em; }
+  .biz-icon { font-size:32px; margin-bottom:20px; }
+  .biz-title { font-size:17px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; line-height:1.2; margin-bottom:12px; }
+  .biz-model-tag { font-size:10px; color:var(--green); letter-spacing:.15em; text-transform:uppercase; font-weight:700; margin-bottom:14px; }
+  .biz-desc { font-size:12px; color:var(--light-gray); line-height:1.7; font-weight:300; margin-bottom:20px; }
+  .biz-list { list-style:none; display:flex; flex-direction:column; gap:7px; }
+  .biz-list li { font-size:11px; color:rgba(255,255,255,.6); font-weight:300; display:flex; gap:10px; align-items:flex-start; }
+  .biz-list li::before { content:'›'; color:var(--green); flex-shrink:0; font-weight:700; }
+  .biz-price { position:absolute; top:36px; right:36px; font-family:'Space Mono',monospace; font-size:10px; color:var(--light-gray); text-align:right; line-height:1.5; }
+
+  /* TARGETS */
+  .targets { background:var(--black); border-top:1px solid rgba(255,255,255,.07); }
+  .targets-layout { display:grid; grid-template-columns:1fr 1.6fr; gap:80px; margin-top:72px; }
+  .target-types { display:flex; flex-direction:column; gap:2px; }
+  .target-type { background:var(--gray); border:1px solid rgba(255,255,255,.06); padding:28px; transition:background .2s; cursor:none; }
+  .target-type:hover { background:var(--mid); }
+  .tt-letter { font-size:11px; font-family:'Space Mono',monospace; color:var(--green); margin-bottom:10px; letter-spacing:.1em; }
+  .tt-name { font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; }
+  .tt-desc { font-size:11px; color:var(--light-gray); font-weight:300; line-height:1.5; }
+  .cos-header { font-size:9px; letter-spacing:.3em; font-weight:700; text-transform:uppercase; color:var(--light-gray); margin-bottom:20px; display:flex; align-items:center; gap:12px; }
+  .cos-header::before { content:''; width:20px; height:1px; background:var(--light-gray); }
+  .cos-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; }
+  .co-item { background:var(--gray); border:1px solid rgba(255,255,255,.05); padding:16px 20px; transition:background .2s, border-color .2s; }
+  .co-item:hover { background:var(--mid); border-color:rgba(255,255,255,.12); }
+  .co-name { font-size:12px; font-weight:600; margin-bottom:3px; }
+  .co-cat { font-size:9px; color:var(--light-gray); letter-spacing:.15em; text-transform:uppercase; font-weight:600; }
+
+  /* UNIVERSITIES */
+  .universities { background:var(--gray); border-top:1px solid rgba(255,255,255,.07); }
+  .uni-layout { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-top:72px; }
+  .uni-steps { display:flex; flex-direction:column; gap:2px; }
+  .uni-step { display:flex; gap:20px; align-items:flex-start; background:var(--mid2); border:1px solid rgba(255,255,255,.06); padding:26px; transition:background .2s; }
+  .uni-step:hover { background:var(--mid); }
+  .uni-step-n { width:36px; height:36px; background:var(--green); color:black; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:14px; flex-shrink:0; }
+  .uni-step-t { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; }
+  .uni-step-d { font-size:11px; color:var(--light-gray); font-weight:300; line-height:1.5; }
+  .uni-schools-lbl { font-size:9px; letter-spacing:.3em; color:var(--light-gray); text-transform:uppercase; font-weight:700; margin-bottom:16px; }
+  .uni-schools { display:flex; flex-direction:column; gap:2px; }
+  .uni-item { display:flex; align-items:center; gap:16px; background:var(--mid2); border:1px solid rgba(255,255,255,.06); padding:20px 24px; transition:all .2s; }
+  .uni-item:hover { background:var(--mid); border-color:rgba(255,214,0,.3); }
+  .uni-n { font-family:'Space Mono',monospace; font-size:10px; color:var(--green); width:20px; flex-shrink:0; }
+  .uni-name { font-size:13px; font-weight:600; }
+  .uni-city { font-size:10px; color:var(--light-gray); font-weight:300; margin-left:auto; letter-spacing:.08em; }
+
+  /* SCALE */
+  .project-scale { background:var(--black); border-top:1px solid rgba(255,255,255,.07); }
+  .scale-bars { display:flex; flex-direction:column; gap:2px; margin-top:72px; }
+  .scale-row { display:flex; align-items:center; gap:24px; background:var(--gray); border:1px solid rgba(255,255,255,.05); padding:28px 32px; position:relative; overflow:hidden; transition:background .2s; }
+  .scale-row:hover { background:var(--mid); }
+  .scale-fill { position:absolute; left:0; top:0; bottom:0; background:rgba(255,214,0,.05); transition:width 1.4s cubic-bezier(.25,.46,.45,.94); }
+  .scale-type { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; width:200px; flex-shrink:0; position:relative; z-index:1; }
+  .scale-desc { font-size:12px; color:var(--light-gray); font-weight:300; flex:1; line-height:1.5; position:relative; z-index:1; }
+  .scale-range { font-family:'Space Mono',monospace; font-size:12px; color:var(--green); font-weight:700; position:relative; z-index:1; white-space:nowrap; text-align:right; }
+
+  /* GLOBAL */
+  .global-sec { background:white; color:black; }
+  .global-sec .section-label { color:#555; }
+  .global-sec .section-label::before { background:#555; }
+  .global-sec .section-title { color:black; }
+  .global-sec .section-title em { -webkit-text-stroke:1px black; color:transparent; }
+  .countries { display:grid; grid-template-columns:repeat(5,1fr); gap:2px; margin-top:72px; }
+  .country { background:#f2f2f2; border:1px solid #e0e0e0; padding:36px 26px; transition:all .2s; }
+  .country:hover { background:black; color:white; }
+  .country:hover .c-role { color:rgba(255,255,255,.4); }
+  .c-flag { font-size:26px; margin-bottom:14px; }
+  .c-name { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px; }
+  .c-role { font-size:9px; letter-spacing:.2em; color:#777; text-transform:uppercase; font-weight:600; transition:color .2s; }
+
+  /* CTA */
+  .cta-block { background:var(--black); border-top:1px solid rgba(255,255,255,.07); min-height:55vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:36px; padding:120px 60px; position:relative; overflow:hidden; }
+  .cta-bigtext { position:absolute; font-size:clamp(90px,16vw,260px); font-weight:900; letter-spacing:-.05em; text-transform:uppercase; color:rgba(255,255,255,.018); white-space:nowrap; user-select:none; line-height:1; pointer-events:none; }
+  .cta-lbl { font-size:9px; letter-spacing:.4em; color:var(--light-gray); text-transform:uppercase; font-weight:600; position:relative; }
+  .cta-h { font-size:clamp(38px,5.5vw,84px); font-weight:900; letter-spacing:-.04em; text-transform:uppercase; line-height:.9; position:relative; }
+  .cta-h em { font-style:normal; -webkit-text-stroke:1px white; color:transparent; }
+  .cta-sub { font-size:14px; color:var(--light-gray); max-width:460px; line-height:1.7; font-weight:300; position:relative; }
+  .cta-acts { display:flex; gap:20px; align-items:center; position:relative; }
+  .cta-mono { font-family:'Space Mono',monospace; font-size:11px; color:var(--light-gray); position:relative; }
+
+  /* FOOTER */
+  footer { background:var(--gray); border-top:1px solid rgba(255,255,255,.1); padding:60px; }
+  .ft-top { display:flex; justify-content:space-between; align-items:flex-start; padding-bottom:44px; border-bottom:1px solid rgba(255,255,255,.07); }
+  .ft-brand { display:flex; flex-direction:column; gap:8px; }
+  .ft-wm { font-size:20px; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
+  .ft-tg { font-size:9px; letter-spacing:.3em; color:var(--light-gray); text-transform:uppercase; font-weight:600; }
+  .ft-ac { font-size:9px; letter-spacing:.2em; color:var(--green); text-transform:uppercase; font-weight:700; margin-top:2px; }
+  .ft-cols { display:flex; gap:56px; }
+  .ft-col h4 { font-size:9px; letter-spacing:.3em; color:var(--light-gray); text-transform:uppercase; font-weight:600; margin-bottom:18px; }
+  .ft-col a,.ft-col p { display:block; font-size:12px; color:rgba(255,255,255,.55); text-decoration:none; line-height:2.1; font-weight:300; transition:color .2s; }
+  .ft-col a:hover { color:white; }
+  .ft-bottom { display:flex; justify-content:space-between; align-items:center; padding-top:28px; }
+  .ft-copy { font-size:10px; color:rgba(255,255,255,.28); font-family:'Space Mono',monospace; }
+  .ft-addr { font-size:10px; color:rgba(255,255,255,.28); font-family:'Space Mono',monospace; text-align:right; line-height:1.7; }
+
+  /* ── MOBILE RESPONSIVE ─────────────────────────────────────────────────── */
+
+  /* Hamburger button */
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .nav-hamburger span {
+    display: block; width: 24px; height: 2px; background: white;
+    transition: transform .3s, opacity .3s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Mobile nav drawer */
+  .nav-drawer {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,.98); z-index: 99;
+    flex-direction: column; align-items: center; justify-content: center; gap: 40px;
+  }
+  .nav-drawer.open { display: flex; }
+  .nav-drawer a {
+    color: white; text-decoration: none; font-size: 24px; font-weight: 700;
+    letter-spacing: .15em; text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-drawer a:hover { color: var(--green); }
+  .nav-drawer .drawer-cta {
+    background: var(--green); color: black; padding: 14px 40px;
+    font-size: 12px; letter-spacing: .25em; font-weight: 700;
+    text-transform: uppercase; text-decoration: none;
+    margin-top: 10px;
+  }
+
+  @media (max-width: 768px) {
+    /* Hide desktop cursor on touch */
+    .cursor, .cursor-ring { display: none; }
+    body { cursor: auto; }
+    a, button { cursor: pointer; }
+
+    /* NAV */
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-wordmark strong { font-size: 11px; }
+    .nav-wordmark small { font-size: 7px; }
+
+    /* HERO */
+    .hero { padding: 0 24px 60px; min-height: 100svh; }
+    .hero-headline { font-size: clamp(38px, 11vw, 64px); letter-spacing: -.03em; }
+    .hero-sub { font-size: 13px; max-width: 100%; margin-top: 24px; }
+    .hero-actions { flex-direction: column; align-items: flex-start; gap: 14px; margin-top: 32px; }
+    .btn-primary { padding: 14px 28px; font-size: 10px; }
+    .hero-stats { position: static; flex-direction: row; gap: 24px; margin-top: 40px; }
+    .hero-stat { text-align: left; }
+    .hero-stat-num { font-size: 24px; }
+    .scroll-indicator { display: none; }
+    .hero-eyebrow { font-size: 9px; flex-wrap: wrap; }
+
+    /* SECTIONS */
+    section { padding: 72px 24px; }
+
+    /* PLATFORM INTRO */
+    .platform-grid { grid-template-columns: 1fr; gap: 40px; }
+
+    /* TECH LINES */
+    .lines-grid { grid-template-columns: 1fr; }
+    .line-card { padding: 28px 24px; }
+
+    /* BIOCONTROL */
+    .bio-layout { grid-template-columns: 1fr; gap: 48px; }
+    .bio-visual { height: 280px; }
+    .bio-ring:nth-child(3), .bio-ring:nth-child(4) { display: none; }
+
+    /* BIZ MODELS */
+    .biz-grid { grid-template-columns: 1fr; }
+    .biz-card { padding: 32px 24px; }
+    .biz-price { position: static; text-align: left; margin-bottom: 12px; }
+
+    /* TARGETS */
+    .targets-layout { grid-template-columns: 1fr; gap: 40px; }
+    .cos-grid { grid-template-columns: 1fr; }
+
+    /* UNIVERSITIES */
+    .uni-layout { grid-template-columns: 1fr; gap: 40px; }
+    .uni-item { flex-wrap: wrap; }
+    .uni-city { margin-left: 0; width: 100%; margin-top: 2px; }
+
+    /* SCALE */
+    .scale-row { flex-direction: column; align-items: flex-start; gap: 8px; padding: 20px 20px; }
+    .scale-type { width: auto; font-size: 12px; }
+    .scale-desc { font-size: 11px; }
+    .scale-range { font-size: 11px; align-self: flex-end; }
+
+    /* GLOBAL */
+    .countries { grid-template-columns: repeat(2, 1fr); }
+    .countries .country:last-child { grid-column: 1 / -1; }
+
+    /* CTA */
+    .cta-block { padding: 80px 24px; gap: 24px; }
+    .cta-acts { flex-direction: column; align-items: center; gap: 14px; width: 100%; }
+    .cta-acts .btn-primary { width: 100%; text-align: center; }
+    .cta-mono { font-size: 9px; text-align: center; }
+
+    /* FOOTER */
+    footer { padding: 40px 24px; }
+    .ft-top { flex-direction: column; gap: 40px; }
+    .ft-cols { flex-direction: column; gap: 32px; }
+    .ft-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .ft-addr { text-align: center; }
+
+    /* MARQUEE */
+    .marquee-inner { font-size: 9px; }
+    .marquee-inner span { margin: 0 20px; }
+
+    /* SECTION TITLES */
+    .section-title { font-size: clamp(28px, 8vw, 48px); }
+  }
+
+  @media (max-width: 400px) {
+    .hero-headline { font-size: 36px; }
+    .hero-stat-num { font-size: 20px; }
+    .hero-stats { gap: 16px; }
+    .bio-visual { height: 220px; }
+    .bio-ring:nth-child(2) { width: 180px; height: 180px; }
+  }
+
+</style>
 </head>
 <body>
-  <p>Redirecting to <a href="studiobloom-05-06-26.html">studiobloom-05-06-26.html</a>…</p>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-box"><img src="Studio_Bloom_on_black.png" alt="StudioBloom Logo"></div>
+    <div class="nav-wordmark">
+      <strong>StudioBloom</strong>
+      <small>Industrial Solutions</small>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#platform">Platform</a></li>
+    <li><a href="#biocontrol">Biocontrollers</a></li>
+    <li><a href="#models">Services</a></li>
+    <li><a href="#targets">Clients</a></li>
+    <li><a href="#universities">Universities</a></li>
+    <li><a href="#contact" class="nav-cta">Engage</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="drawer">
+  <a href="#platform" class="drawer-link">Platform</a>
+  <a href="#biocontrol" class="drawer-link">Biocontrollers</a>
+  <a href="#models" class="drawer-link">Services</a>
+  <a href="#targets" class="drawer-link">Clients</a>
+  <a href="#universities" class="drawer-link">Universities</a>
+  <a href="#contact" class="drawer-cta">Engage</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-ticker">
+    <div class="hero-ticker-inner">
+      DEHYDRATION · MILLING · BIOCONTROLLERS · AGROINDUSTRIAL · AI+IOT · CALIFORNIA 2026 · DEHYDRATION · MILLING · BIOCONTROLLERS · AGROINDUSTRIAL · AI+IOT · CALIFORNIA 2026 ·&nbsp;
+      DEHYDRATION · MILLING · BIOCONTROLLERS · AGROINDUSTRIAL · AI+IOT · CALIFORNIA 2026 · DEHYDRATION · MILLING · BIOCONTROLLERS · AGROINDUSTRIAL · AI+IOT · CALIFORNIA 2026 ·&nbsp;
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-text">Scroll</div>
+    <div class="scroll-bar"></div>
+  </div>
+
+  <div class="hero-eyebrow">
+    Industrial Technology — USA Deployment
+    <span class="pill">California 2026</span>
+  </div>
+
+  <h1 class="hero-headline">
+    Agroindustrial<br>
+    <em>Transformation</em>
+  </h1>
+
+  <p class="hero-sub">StudioBloom LA delivers proven agroindustrial technology to California — dehydration systems, high-efficiency milling, biocontrollers, and AI+IoT remote monitoring for food, biotech, and specialty ingredient producers.</p>
+
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Request Briefing</a>
+    <a href="#platform" class="btn-ghost">Explore Platform</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num green">6</div>
+      <div class="hero-stat-label">Tech Lines</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">20+</div>
+      <div class="hero-stat-label">CA Targets</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num green">$80K+</div>
+      <div class="hero-stat-label">Project Entry</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>Dehydration</span><span class="mdot">·</span>
+    <span>Milling</span><span class="mdot">·</span>
+    <span>Biocontrollers</span><span class="mdot">·</span>
+    <span>Material Handling</span><span class="mdot">·</span>
+    <span>Mixing & Homogenization</span><span class="mdot">·</span>
+    <span>Dosing & Packaging</span><span class="mdot">·</span>
+    <span>PLC + HMI Control</span><span class="mdot">·</span>
+    <span>AI + IoT Monitoring</span><span class="mdot">·</span>
+    <span>Dehydration</span><span class="mdot">·</span>
+    <span>Milling</span><span class="mdot">·</span>
+    <span>Biocontrollers</span><span class="mdot">·</span>
+    <span>Material Handling</span><span class="mdot">·</span>
+    <span>Mixing & Homogenization</span><span class="mdot">·</span>
+    <span>Dosing & Packaging</span><span class="mdot">·</span>
+    <span>PLC + HMI Control</span><span class="mdot">·</span>
+    <span>AI + IoT Monitoring</span><span class="mdot">·</span>
+  </div>
+</div>
+
+<!-- PLATFORM INTRO -->
+<section class="platform-intro" id="platform">
+  <div class="section-label reveal">Our Platform</div>
+  <h2 class="section-title reveal d1">StudioBloom LA<br><em>Industrial</em><br>Technology</h2>
+
+  <div class="platform-grid">
+    <div class="platform-text reveal d2">
+      <p>StudioBloom LA Inc. is a California-based industrial technology company with a validated track record in agroindustrial transformation across food science, biotechnology, and specialty ingredients.</p>
+      <p>Our model is built on applied engineering, precision process control, and continuous technical support. The platform is scalable across California through AI & IoT integration — delivered through transformation services, equipment supply, plant design, and process optimization.</p>
+      <div class="platform-badge">
+        <div class="platform-badge-dot"></div>
+        <span>Proven Technology · Deploying in California · 2026</span>
+      </div>
+    </div>
+
+    <div class="platform-steps reveal d3">
+      <h3>US Deployment Strategy</h3>
+      <div class="astep">
+        <div class="astep-num">01</div>
+        <div class="astep-body">
+          <strong>Entry via Transformation Services</strong>
+          <span>Maquila-style processing services generate immediate cash flow — clients deliver raw material, receive transformed product, pay per kg processed.</span>
+        </div>
+      </div>
+      <div class="astep">
+        <div class="astep-num">02</div>
+        <div class="astep-body">
+          <strong>University Pilot Programs</strong>
+          <span>Partner with UC Davis, UC Berkeley, Stanford, Cal Poly, and UC Riverside for technical validation — building credibility through real US case studies.</span>
+        </div>
+      </div>
+      <div class="astep">
+        <div class="astep-num">03</div>
+        <div class="astep-body">
+          <strong>Equipment Supply + Expansion</strong>
+          <span>Scale from services into equipment supply and full plant design contracts as US market trust and technical validation is established.</span>
+        </div>
+      </div>
+      <div class="astep">
+        <div class="astep-num">04</div>
+        <div class="astep-body">
+          <strong>AI + IoT Scaling</strong>
+          <span>StudioBloom remote monitoring software, PLC+HMI control, and IoT integration make the model replicable across multiple simultaneous client deployments.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH LINES -->
+<section class="tech-lines" id="techlines">
+  <div class="section-label reveal">Technology Lines</div>
+  <h2 class="section-title reveal d1">Six <em>Industrial</em><br>Capability Lines</h2>
+
+  <div class="lines-grid">
+    <div class="line-card reveal d1">
+      <div class="line-num">LINE 1.1</div>
+      <div class="line-icon">🌡️</div>
+      <div class="line-title">Dehydration<br>Biotech & Food</div>
+      <ul class="line-items">
+        <li>Hot air dryers: tray / tunnel / continuous</li>
+        <li>Recirculating air dryers — high energy efficiency</li>
+        <li>Industrial air handling systems for food & agroindustry</li>
+        <li>Fans, ducts, and basic filtration</li>
+      </ul>
+    </div>
+
+    <div class="line-card reveal d2">
+      <div class="line-num">LINE 1.2</div>
+      <div class="line-icon">⚙️</div>
+      <div class="line-title">Milling<br>Biotech & Food</div>
+      <ul class="line-items">
+        <li>High-efficiency mixed mills (dry agricultural products)</li>
+        <li>Low-energy mills — preserves product properties</li>
+        <li>Classification systems: sieves and cyclones</li>
+      </ul>
+    </div>
+
+    <div class="line-card reveal d3">
+      <div class="line-num">LINE 1.3</div>
+      <div class="line-icon">🏭</div>
+      <div class="line-title">Material Handling<br>Agroindustry</div>
+      <ul class="line-items">
+        <li>Reception hoppers</li>
+        <li>Screw conveyor systems</li>
+        <li>Bucket elevators (layout dependent)</li>
+        <li>Controlled discharge systems</li>
+      </ul>
+    </div>
+
+    <div class="line-card reveal d1">
+      <div class="line-num">LINE 1.4</div>
+      <div class="line-icon">🔄</div>
+      <div class="line-title">Mixing &<br>Homogenization</div>
+      <ul class="line-items">
+        <li>Ribbon-type mixers</li>
+        <li>Low-shear mixers for sensitive products</li>
+      </ul>
+    </div>
+
+    <div class="line-card reveal d2">
+      <div class="line-num">LINE 1.5</div>
+      <div class="line-icon">📦</div>
+      <div class="line-title">Dosing &<br>Packaging</div>
+      <ul class="line-items">
+        <li>Solid dosing systems: gravimetric or volumetric</li>
+        <li>Semi-automatic packaging systems</li>
+      </ul>
+    </div>
+
+    <div class="line-card reveal d3">
+      <div class="line-num">LINE 1.6</div>
+      <div class="line-icon">🖥️</div>
+      <div class="line-title">Control &<br>Support Systems</div>
+      <ul class="line-items">
+        <li>Air compressors + industrial filtration</li>
+        <li>Electrical panels: PLC + HMI control</li>
+        <li>Temperature & air flow instrumentation</li>
+        <li>StudioBloom remote monitoring software</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- BIOCONTROLLERS — HERO FEATURE -->
+<section class="biocontrol" id="biocontrol">
+  <div class="bio-glow"></div>
+
+  <div class="bio-layout">
+    <div class="bio-visual reveal">
+      <div class="bio-rings">
+        <div class="bio-ring"></div>
+        <div class="bio-ring"></div>
+        <div class="bio-ring"></div>
+        <div class="bio-ring"></div>
+      </div>
+      <div class="bio-center">
+        <div class="bio-center-icon">🧫</div>
+        <div class="bio-center-label">Bio<br>Controllers</div>
+      </div>
+    </div>
+
+    <div class="reveal d2">
+      <div class="bio-tag">★ Featured Technology</div>
+      <h2 class="bio-title">
+        StudioBloom<br><span class="green">Bio</span><em>controllers</em>
+      </h2>
+      <p class="bio-desc">StudioBloom's biocontroller systems are the intelligent core of the agroindustrial platform — integrating biological process intelligence with industrial automation to maximize yield, reduce waste, and guarantee product consistency across all transformation lines.</p>
+
+      <div class="bio-features">
+        <div class="bio-feat">
+          <div class="bio-feat-icon">🌡️</div>
+          <div class="bio-feat-text">
+            <strong>Thermal Process Control</strong>
+            <span>Precision temperature and airflow management across dehydration cycles — preserving bioactive compounds, enzymes, and nutritional integrity in food and ingredient products.</span>
+          </div>
+        </div>
+        <div class="bio-feat">
+          <div class="bio-feat-icon">📡</div>
+          <div class="bio-feat-text">
+            <strong>IoT Remote Monitoring</strong>
+            <span>Real-time process data via StudioBloom's monitoring software — remote diagnostics, live alerts, and operational parameter adjustments from anywhere in the world.</span>
+          </div>
+        </div>
+        <div class="bio-feat">
+          <div class="bio-feat-icon">🤖</div>
+          <div class="bio-feat-text">
+            <strong>AI-Assisted Optimization</strong>
+            <span>Machine learning applied to process parameters — continuously improving energy efficiency, throughput, and output quality across transformation lines over time.</span>
+          </div>
+        </div>
+        <div class="bio-feat">
+          <div class="bio-feat-icon">🧬</div>
+          <div class="bio-feat-text">
+            <strong>Biological Sensitivity Awareness</strong>
+            <span>Designed for biotechnology and functional ingredient applications — biocontrollers that understand and protect the biological properties of materials being processed.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS MODELS -->
+<section class="biz-models" id="models">
+  <div class="section-label reveal">Business Models</div>
+  <h2 class="section-title reveal d1">Four Ways<br>We <em>Deliver</em><br>Value</h2>
+
+  <div class="biz-grid">
+    <div class="biz-card reveal d1">
+      <div class="biz-num">MODEL 2.1</div>
+      <div class="biz-icon">🏗️</div>
+      <div class="biz-title">Transformation Services (Maquila)</div>
+      <div class="biz-model-tag">Immediate Cash Flow</div>
+      <div class="biz-price">$2K–$10K / month</div>
+      <p class="biz-desc">Client delivers raw material. We process it. Client receives transformed product, charged per kg. The fastest path to revenue and building client relationships in California.</p>
+      <ul class="biz-list">
+        <li>Agricultural product dehydration</li>
+        <li>Milling and pulverization</li>
+        <li>By-product transformation</li>
+      </ul>
+    </div>
+
+    <div class="biz-card reveal d2">
+      <div class="biz-num">MODEL 2.2</div>
+      <div class="biz-icon">🔧</div>
+      <div class="biz-title">Equipment Supply + Technical Service</div>
+      <div class="biz-model-tag">Sale + Recurring Support</div>
+      <div class="biz-price">$80K–$1.5M<br>+ support contract</div>
+      <p class="biz-desc">Full equipment supply with installation, commissioning, and ongoing technical support — combining capital equipment sales with recurring service contract revenue.</p>
+      <ul class="biz-list">
+        <li>Equipment procurement and supply</li>
+        <li>Installation and commissioning</li>
+        <li>Ongoing technical support contracts</li>
+      </ul>
+    </div>
+
+    <div class="biz-card reveal d3">
+      <div class="biz-num">MODEL 2.3</div>
+      <div class="biz-icon">📐</div>
+      <div class="biz-title">Plant Design & Implementation</div>
+      <div class="biz-model-tag">High-Value Engineering</div>
+      <div class="biz-price">$200K–$1.5M<br>per project</div>
+      <p class="biz-desc">End-to-end agroindustrial plant design — from process engineering to equipment integration to technical supervision. Full-scope projects for food producers and institutions.</p>
+      <ul class="biz-list">
+        <li>Industrial process design</li>
+        <li>Equipment integration across all lines</li>
+        <li>Technical supervision and validation</li>
+        <li>Real-world applications: agroindustrial plants</li>
+      </ul>
+    </div>
+
+    <div class="biz-card reveal d4">
+      <div class="biz-num">MODEL 2.4</div>
+      <div class="biz-icon">📈</div>
+      <div class="biz-title">Process Optimization</div>
+      <div class="biz-model-tag">Efficiency Upgrades</div>
+      <div class="biz-price">$2K–$10K / month</div>
+      <p class="biz-desc">Retrofit and optimize existing client operations — improving thermal efficiency, reducing energy consumption, and unlocking throughput without full capital replacement.</p>
+      <ul class="biz-list">
+        <li>Thermal efficiency improvement</li>
+        <li>Energy consumption reduction</li>
+        <li>Operational adjustments and tuning</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TARGET CLIENTS -->
+<section class="targets" id="targets">
+  <div class="section-label reveal">Target Market</div>
+  <h2 class="section-title reveal d1">California's<br><em>Agroindustrial</em><br>Leaders</h2>
+
+  <div class="targets-layout">
+    <div>
+      <div class="target-types reveal d2">
+        <div class="target-type">
+          <div class="tt-letter">TYPE A</div>
+          <div class="tt-name">Agricultural Producers</div>
+          <div class="tt-desc">Fruits, vegetables, mushrooms, herbs — reducing post-harvest losses through dehydration and value-added processing.</div>
+        </div>
+        <div class="target-type">
+          <div class="tt-letter">TYPE B</div>
+          <div class="tt-name">Food Companies</div>
+          <div class="tt-desc">Dehydrated ingredient manufacturers and processed food producers requiring consistent, high-volume transformation lines.</div>
+        </div>
+        <div class="target-type">
+          <div class="tt-letter">TYPE C</div>
+          <div class="tt-name">Ingredient Companies</div>
+          <div class="tt-desc">Vegetable powders, functional raw materials, nutraceuticals — precision milling and biocontrollers are critical here.</div>
+        </div>
+        <div class="target-type">
+          <div class="tt-letter">TYPE D</div>
+          <div class="tt-name">Technical & R&D Centers</div>
+          <div class="tt-desc">Companies and universities focused on operational efficiency and process development — natural university pilot partners.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal d3">
+      <div class="cos-header">20 California Target Companies</div>
+      <div class="cos-grid">
+        <div class="co-item"><div class="co-name">Driscoll's</div><div class="co-cat">Agroindustry</div></div>
+        <div class="co-item"><div class="co-name">Grimmway Farms</div><div class="co-cat">Agroindustry</div></div>
+        <div class="co-item"><div class="co-name">Taylor Farms</div><div class="co-cat">Agroindustry</div></div>
+        <div class="co-item"><div class="co-name">Earthbound Farm</div><div class="co-cat">Agroindustry</div></div>
+        <div class="co-item"><div class="co-name">Dole Food Company</div><div class="co-cat">Agroindustry</div></div>
+        <div class="co-item"><div class="co-name">Bolthouse Farms</div><div class="co-cat">Agroindustry</div></div>
+        <div class="co-item"><div class="co-name">Sun Pacific</div><div class="co-cat">Agroindustry</div></div>
+        <div class="co-item"><div class="co-name">Calavo Growers</div><div class="co-cat">Agroindustry</div></div>
+        <div class="co-item"><div class="co-name">Mission Produce</div><div class="co-cat">Agroindustry</div></div>
+        <div class="co-item"><div class="co-name">Wonderful Company</div><div class="co-cat">Agroindustry</div></div>
+        <div class="co-item"><div class="co-name">ADM</div><div class="co-cat">Ingredients</div></div>
+        <div class="co-item"><div class="co-name">Cargill</div><div class="co-cat">Ingredients</div></div>
+        <div class="co-item"><div class="co-name">Ingredion</div><div class="co-cat">Ingredients</div></div>
+        <div class="co-item"><div class="co-name">Sensient Technologies</div><div class="co-cat">Ingredients</div></div>
+        <div class="co-item"><div class="co-name">Givaudan</div><div class="co-cat">Ingredients</div></div>
+        <div class="co-item"><div class="co-name">Blue Diamond Growers</div><div class="co-cat">Specialty</div></div>
+        <div class="co-item"><div class="co-name">SunOpta</div><div class="co-cat">Specialty</div></div>
+        <div class="co-item"><div class="co-name">Pacific Foods</div><div class="co-cat">Specialty</div></div>
+        <div class="co-item"><div class="co-name">Amy's Kitchen</div><div class="co-cat">Specialty</div></div>
+        <div class="co-item"><div class="co-name">Olam Food Ingredients</div><div class="co-cat">Specialty</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UNIVERSITY STRATEGY -->
+<section class="universities" id="universities">
+  <div class="section-label reveal">Academic Partnership</div>
+  <h2 class="section-title reveal d1">University<br><em>Validation</em><br>Strategy</h2>
+
+  <div class="uni-layout">
+    <div>
+      <div class="uni-steps reveal d2">
+        <div class="uni-step">
+          <div class="uni-step-n">1</div>
+          <div>
+            <div class="uni-step-t">Pilot Equipment Installation</div>
+            <div class="uni-step-d">Install StudioBloom equipment within university research facilities — not for commercial return, but to establish presence and prove capability in a US context.</div>
+          </div>
+        </div>
+        <div class="uni-step">
+          <div class="uni-step-n">2</div>
+          <div>
+            <div class="uni-step-t">Technical Process Validation</div>
+            <div class="uni-step-d">Co-develop and validate processes with university researchers — generating US-based technical case studies with academic credibility.</div>
+          </div>
+        </div>
+        <div class="uni-step">
+          <div class="uni-step-n">3</div>
+          <div>
+            <div class="uni-step-t">Joint Development Programs</div>
+            <div class="uni-step-d">Collaborative R&D with faculty and graduate programs in food science, biotech, and chemical engineering — building StudioBloom's US reputation.</div>
+          </div>
+        </div>
+        <div class="uni-step">
+          <div class="uni-step-n">4</div>
+          <div>
+            <div class="uni-step-t">Bridge to Industrial Clients</div>
+            <div class="uni-step-d">University validation converts to industry trust — the direct pathway to commercial contracts with Driscoll's, Cargill, Blue Diamond, and others.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal d3">
+      <div class="uni-schools-lbl">5 Target California Universities</div>
+      <div class="uni-schools">
+        <div class="uni-item"><div class="uni-n">01</div><div class="uni-name">University of California, Davis</div><div class="uni-city">Davis, CA</div></div>
+        <div class="uni-item"><div class="uni-n">02</div><div class="uni-name">University of California, Berkeley</div><div class="uni-city">Berkeley, CA</div></div>
+        <div class="uni-item"><div class="uni-n">03</div><div class="uni-name">Stanford University</div><div class="uni-city">Palo Alto, CA</div></div>
+        <div class="uni-item"><div class="uni-n">04</div><div class="uni-name">Cal Poly State University</div><div class="uni-city">San Luis Obispo, CA</div></div>
+        <div class="uni-item"><div class="uni-n">05</div><div class="uni-name">University of California, Riverside</div><div class="uni-city">Riverside, CA</div></div>
+      </div>
+
+      <div style="margin-top:32px; background:var(--mid2); border:1px solid rgba(255,255,255,.08); padding:28px; border-left:3px solid var(--green);">
+        <div style="font-size:9px; letter-spacing:.3em; color:var(--green); text-transform:uppercase; font-weight:700; margin-bottom:12px;">Entry Principle</div>
+        <p style="font-size:13px; color:var(--light-gray); line-height:1.8; font-weight:300;"><strong style="color:white;">Not sales — validation.</strong> Technical credibility and real US case studies are the bridge from our proven track record to California's industrial clients.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT SCALE -->
+<section class="project-scale" id="scale">
+  <div class="section-label reveal">Investment Reference</div>
+  <h2 class="section-title reveal d1">Project<br><em>Sizing</em><br>Guide</h2>
+
+  <div class="scale-bars reveal d2">
+    <div class="scale-row">
+      <div class="scale-fill" data-width="28%"></div>
+      <div class="scale-type">Small Project</div>
+      <div class="scale-desc">Entry-level equipment lines, single-process installations, or maquila setups for smaller producers and ingredient companies.</div>
+      <div class="scale-range">$80K – $200K</div>
+    </div>
+    <div class="scale-row">
+      <div class="scale-fill" data-width="52%"></div>
+      <div class="scale-type">Mid-Scale Project</div>
+      <div class="scale-desc">Multi-line installations — combined dehydration + milling + biocontrollers + monitoring integration. Most common entry for food companies.</div>
+      <div class="scale-range">$200K – $600K</div>
+    </div>
+    <div class="scale-row">
+      <div class="scale-fill" data-width="85%"></div>
+      <div class="scale-type">Full Plant Project</div>
+      <div class="scale-desc">Complete agroindustrial plant design, full equipment integration across all technology lines, PLC/HMI systems, and long-term technical partnership.</div>
+      <div class="scale-range">$600K – $1.5M</div>
+    </div>
+    <div class="scale-row">
+      <div class="scale-fill" data-width="18%"></div>
+      <div class="scale-type">Technical Services</div>
+      <div class="scale-desc">Monthly optimization, monitoring, maquila processing, and consulting services. Recurring revenue baseline that scales with client count.</div>
+      <div class="scale-range">$2K – $10K / mo</div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL PRESENCE -->
+<section class="global-sec" id="global">
+  <div class="section-label reveal">Global Operations</div>
+  <h2 class="section-title reveal d1">Colombia<br><em>Proven.</em><br>California Next.</h2>
+
+  <div class="countries reveal d2">
+    <div class="country">
+      <div class="c-flag">🇺🇸</div>
+      <div class="c-name">USA</div>
+      <div class="c-role">Deploying 2026 · Oakland, CA</div>
+    </div>
+    <div class="country">
+      <div class="c-flag">🇨🇴</div>
+      <div class="c-name">Colombia</div>
+      <div class="c-role">Technology Origin · Proven Model</div>
+    </div>
+    <div class="country">
+      <div class="c-flag">🌐</div>
+      <div class="c-name">Country 3</div>
+      <div class="c-role">Active Operations</div>
+    </div>
+    <div class="country">
+      <div class="c-flag">🌐</div>
+      <div class="c-name">Country 4</div>
+      <div class="c-role">Active Operations</div>
+    </div>
+    <div class="country">
+      <div class="c-flag">🌐</div>
+      <div class="c-name">Country 5</div>
+      <div class="c-role">Active Operations</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-block" id="contact">
+  <div class="cta-bigtext">SBLA</div>
+  <div class="cta-lbl reveal">Strategic Engagement</div>
+  <h2 class="cta-h reveal d1">
+    Let's Build<br>Something<br><em>Real</em>
+  </h2>
+  <p class="cta-sub reveal d2">Whether you're a California food producer, ingredient company, university partner, or strategic investor — we're ready to brief you on what StudioBloom LA can do for your operation.</p>
+  <div class="cta-acts reveal d3">
+    <a href="mailto:hq@studiobloomla.com" class="btn-primary">Request a Briefing</a>
+    <a href="tel:+18882425525" class="btn-ghost">+1 (888) 242 5525</a>
+  </div>
+  <div class="cta-mono reveal d4">hq@studiobloomla.com · www.studiobloomla.com</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div class="ft-brand">
+      <div class="ft-wm">StudioBloom</div>
+      <div class="ft-tg">Industrial Solutions</div>
+      <div class="ft-ac">Industrial Technology · California · 2026</div>
+    </div>
+    <div class="ft-cols">
+      <div class="ft-col">
+        <h4>Platform</h4>
+        <a href="#platform">Our Platform</a>
+        <a href="#techlines">Technology Lines</a>
+        <a href="#biocontrol">Biocontrollers</a>
+        <a href="#scale">Project Sizing</a>
+      </div>
+      <div class="ft-col">
+        <h4>Go-To-Market</h4>
+        <a href="#models">Business Models</a>
+        <a href="#targets">Target Clients</a>
+        <a href="#universities">University Strategy</a>
+        <a href="#global">Global Operations</a>
+      </div>
+      <div class="ft-col">
+        <h4>Contact</h4>
+        <p>hq@studiobloomla.com</p>
+        <p>+1 (888) 242 5525</p>
+        <p>www.studiobloomla.com</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-copy">© 2026 StudioBloom LA Inc. — All rights reserved.</div>
+    <div class="ft-addr">
+      1999 Harrison St, 18th Floor · PMB OAK2513<br>
+      Oakland, CA 94612 · United States
+    </div>
+  </div>
+</footer>
+
+<script>
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
+  function animRing(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); }
+  animRing();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ cursor.style.width='20px'; cursor.style.height='20px'; ring.style.width='60px'; ring.style.height='60px'; });
+    el.addEventListener('mouseleave',()=>{ cursor.style.width='12px'; cursor.style.height='12px'; ring.style.width='40px'; ring.style.height='40px'; });
+  });
+
+  // SCROLL REVEAL
+  const revEls = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }); },{threshold:.1});
+  revEls.forEach(el=>obs.observe(el));
+
+  // SCALE BAR ANIMATION
+  const scaleFills = document.querySelectorAll('.scale-fill');
+  const scaleObs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const w = e.target.getAttribute('data-width');
+        setTimeout(()=>{ e.target.style.width=w; },100);
+        scaleObs.unobserve(e.target);
+      }
+    });
+  },{threshold:.4});
+  scaleFills.forEach(f=>{ f.style.width='0'; f.style.transition='width 1.4s cubic-bezier(.25,.46,.45,.94)'; scaleObs.observe(f); });
+
+  // HAMBURGER MENU
+  const hamburger = document.getElementById('hamburger');
+  const drawer = document.getElementById('drawer');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  });
+  document.querySelectorAll('.drawer-link, .drawer-cta').forEach(el => {
+    el.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
 </body>
 </html>
