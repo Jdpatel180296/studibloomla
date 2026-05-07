@@ -72,9 +72,27 @@
   }
   .hero-grid {
     position:absolute; inset:0;
+    background-image: url('images/image_14.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+  }
+  .hero-overlay {
+    position:absolute; inset:0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,.55) 0%,
+      rgba(0,0,0,.35) 40%,
+      rgba(0,0,0,.75) 75%,
+      rgba(0,0,0,.95) 100%
+    );
+  }
+  .hero-grid-lines {
+    position:absolute; inset:0;
     background:
-      repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(255,255,255,.025) 79px,rgba(255,255,255,.025) 80px),
-      repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(255,255,255,.025) 79px,rgba(255,255,255,.025) 80px);
+      repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(255,255,255,.03) 79px,rgba(255,255,255,.03) 80px),
+      repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(255,255,255,.03) 79px,rgba(255,255,255,.03) 80px);
+    pointer-events:none;
   }
   .hero-ticker {
     position:absolute; top:50%; left:0; right:0;
@@ -171,7 +189,11 @@
 
   /* PLATFORM INTRO */
   .platform-intro { background:var(--gray); border-top:1px solid rgba(255,255,255,.07); }
-  .platform-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-top:72px; align-items:start; }
+  .platform-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:40px; margin-top:72px; align-items:start; }
+  .platform-img { position:relative; overflow:hidden; height:520px; }
+  .platform-img img { width:100%; height:100%; object-fit:cover; object-position:center; display:block; filter:grayscale(20%); transition:filter .4s; }
+  .platform-img:hover img { filter:grayscale(0%); }
+  .platform-img::after { content:''; position:absolute; inset:0; background:linear-gradient(to bottom, transparent 60%, rgba(0,0,0,.5) 100%); }
   .platform-text p { font-size:14px; line-height:1.85; color:var(--light-gray); font-weight:300; margin-top:28px; }
   .platform-badge { display:inline-flex; align-items:center; gap:10px; background:var(--mid2); border:1px solid rgba(255,255,255,.1); padding:10px 18px; margin-top:32px; }
   .platform-badge-dot { width:8px; height:8px; background:var(--green); flex-shrink:0; }
@@ -202,7 +224,8 @@
   .biocontrol { background:var(--black); border-top:3px solid var(--green); position:relative; overflow:hidden; }
   .bio-glow { position:absolute; top:-200px; left:50%; transform:translateX(-50%); width:700px; height:700px; border-radius:50%; background:radial-gradient(circle,rgba(255,214,0,.07) 0%,transparent 70%); pointer-events:none; }
   .bio-layout { display:grid; grid-template-columns:1fr 1fr; gap:100px; margin-top:72px; align-items:center; }
-  .bio-visual { position:relative; display:flex; align-items:center; justify-content:center; height:480px; }
+  .bio-visual { position:relative; display:flex; align-items:center; justify-content:center; height:560px; }
+  .bio-photo { width:100%; height:100%; object-fit:contain; object-position:center center; display:block; background:var(--gray); }
   .bio-rings { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
   .bio-ring { position:absolute; border-radius:50%; border:1px solid rgba(255,214,0,.25); animation:expandRing 4s ease-out infinite; }
   .bio-ring:nth-child(1){ width:120px; height:120px; animation-delay:0s; }
@@ -227,7 +250,31 @@
   /* BIZ MODELS */
   .biz-models { background:var(--gray); border-top:1px solid rgba(255,255,255,.07); }
   .biz-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; margin-top:72px; }
-  .biz-card { background:var(--mid); border:1px solid rgba(255,255,255,.06); padding:44px 36px; position:relative; overflow:hidden; transition:background .25s; }
+  .biz-card {
+    background:var(--mid); border:1px solid rgba(255,255,255,.06);
+    padding:0; position:relative; overflow:hidden;
+    transition:background .25s;
+    display:grid; grid-template-columns:1fr 1fr;
+    min-height:420px;
+  }
+  .biz-card-img {
+    position:relative; overflow:hidden;
+  }
+  .biz-card-img img {
+    width:100%; height:100%; object-fit:cover; object-position:center;
+    display:block; filter:grayscale(15%);
+    transition:transform .6s cubic-bezier(.25,.46,.45,.94), filter .4s;
+  }
+  .biz-card:hover .biz-card-img img { transform:scale(1.04); filter:grayscale(0%); }
+  .biz-card-img::after { content:''; }
+  .biz-card-body {
+    padding:36px 32px 36px 28px; display:flex; flex-direction:column;
+    justify-content:space-between; position:relative; z-index:1;
+  }
+  /* Alternate: even cards flip image to right */
+  .biz-card:nth-child(even) { direction:rtl; }
+  .biz-card:nth-child(even) .biz-card-body { direction:ltr; padding:36px 28px 36px 32px; }
+
   .biz-card:hover { background:var(--mid2); }
   .biz-num { font-family:'Space Mono',monospace; font-size:10px; color:var(--light-gray); margin-bottom:24px; letter-spacing:.1em; }
   .biz-icon { font-size:32px; margin-bottom:20px; }
@@ -237,7 +284,7 @@
   .biz-list { list-style:none; display:flex; flex-direction:column; gap:7px; }
   .biz-list li { font-size:11px; color:rgba(255,255,255,.6); font-weight:300; display:flex; gap:10px; align-items:flex-start; }
   .biz-list li::before { content:'›'; color:var(--green); flex-shrink:0; font-weight:700; }
-  .biz-price { position:absolute; top:36px; right:36px; font-family:'Space Mono',monospace; font-size:10px; color:var(--light-gray); text-align:right; line-height:1.5; }
+  .biz-price { font-family:'Space Mono',monospace; font-size:10px; color:var(--light-gray); line-height:1.5; margin-bottom:16px; }
 
   /* TARGETS */
   .targets { background:var(--black); border-top:1px solid rgba(255,255,255,.07); }
@@ -278,7 +325,12 @@
   .scale-bars { display:flex; flex-direction:column; gap:2px; margin-top:72px; }
   .scale-row { display:flex; align-items:center; gap:24px; background:var(--gray); border:1px solid rgba(255,255,255,.05); padding:28px 32px; position:relative; overflow:hidden; transition:background .2s; }
   .scale-row:hover { background:var(--mid); }
-  .scale-fill { position:absolute; left:0; top:0; bottom:0; background:rgba(255,214,0,.05); transition:width 1.4s cubic-bezier(.25,.46,.45,.94); }
+  .scale-fill {
+    position:absolute; left:0; top:0; bottom:0;
+    background: linear-gradient(to right, rgba(255,214,0,.35), rgba(255,214,0,.15));
+    border-right: 2px solid var(--green);
+    transition:width 1.4s cubic-bezier(.25,.46,.45,.94);
+  }
   .scale-type { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; width:200px; flex-shrink:0; position:relative; z-index:1; }
   .scale-desc { font-size:12px; color:var(--light-gray); font-weight:300; flex:1; line-height:1.5; position:relative; z-index:1; }
   .scale-range { font-family:'Space Mono',monospace; font-size:12px; color:var(--green); font-weight:700; position:relative; z-index:1; white-space:nowrap; text-align:right; }
@@ -289,6 +341,22 @@
   .global-sec .section-label::before { background:#555; }
   .global-sec .section-title { color:black; }
   .global-sec .section-title em { -webkit-text-stroke:1px black; color:transparent; }
+
+  .global-inner { display:grid; grid-template-columns:1fr 1.8fr; gap:60px; align-items:center; }
+  .global-left { display:flex; flex-direction:column; }
+
+  .countries-vert { display:flex; flex-direction:column; gap:2px; margin-top:40px; }
+  .country-row { display:flex; align-items:center; gap:14px; padding:16px 20px; border:1px solid #e8e8e8; background:#f9f9f9; transition:background .2s, border-color .2s; }
+  .country-row:hover { background:#f0f0f0; border-color:#ccc; }
+  .cr-dot { width:10px; height:10px; background:#ffd600; border-radius:50%; flex-shrink:0; box-shadow:0 0 0 3px rgba(255,214,0,.2); }
+  .cr-dot-sm { width:8px; height:8px; }
+  .cr-name { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#111; margin-bottom:2px; }
+  .cr-role { font-size:9px; letter-spacing:.18em; color:#777; text-transform:uppercase; font-weight:600; }
+
+  @media (max-width:768px) {
+    .global-inner { grid-template-columns:1fr; gap:40px; }
+    #world-map { aspect-ratio:4/3; }
+  }
   .countries { display:grid; grid-template-columns:repeat(5,1fr); gap:2px; margin-top:72px; }
   .country { background:#f2f2f2; border:1px solid #e0e0e0; padding:36px 26px; transition:all .2s; }
   .country:hover { background:black; color:white; }
@@ -394,13 +462,17 @@
 
     /* BIOCONTROL */
     .bio-layout { grid-template-columns: 1fr; gap: 48px; }
-    .bio-visual { height: 280px; }
+    .bio-visual { height: 420px; }
     .bio-ring:nth-child(3), .bio-ring:nth-child(4) { display: none; }
 
     /* BIZ MODELS */
     .biz-grid { grid-template-columns: 1fr; }
     .biz-card { padding: 32px 24px; }
-    .biz-price { position: static; text-align: left; margin-bottom: 12px; }
+    .biz-card { grid-template-columns:1fr; min-height:auto; direction:ltr !important; }
+  .biz-card-img { height:260px; }
+
+  .biz-card-body { padding:28px 24px; direction:ltr !important; }
+  .biz-price { text-align:left; }
 
     /* TARGETS */
     .targets-layout { grid-template-columns: 1fr; gap: 40px; }
@@ -450,6 +522,121 @@
     .bio-ring:nth-child(2) { width: 180px; height: 180px; }
   }
 
+
+  /* PHOTO GALLERY STRIP */
+  .gallery-strip {
+    background: var(--black);
+    padding: 0 0 0 60px;
+    overflow: hidden;
+    position: relative;
+    border-top: 1px solid rgba(255,255,255,.07);
+  }
+  .gallery-strip::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 120px;
+    background: linear-gradient(to right, transparent, var(--black));
+    pointer-events: none;
+    z-index: 2;
+  }
+  .gallery-track {
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    cursor: grab;
+    padding-bottom: 0;
+  }
+  .gallery-track::-webkit-scrollbar { display: none; }
+  .gallery-track.grabbing { cursor: grabbing; }
+  .gallery-item {
+    flex: 0 0 380px;
+    height: 260px;
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: start;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform .5s cubic-bezier(.25,.46,.45,.94), filter .4s;
+    filter: grayscale(30%);
+  }
+  .gallery-item:hover img {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+  }
+  .gallery-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 100%);
+    padding: 28px 16px 14px;
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: rgba(255,255,255,.7);
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .gallery-item:hover .gallery-caption { opacity: 1; }
+  .gallery-item::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 2px; width: 0;
+    background: var(--green);
+    transition: width .4s;
+    z-index: 2;
+  }
+  .gallery-item:hover::before { width: 100%; }
+
+  @media (max-width: 768px) {
+    .gallery-strip { padding: 0 0 0 24px; }
+    .gallery-item { flex: 0 0 280px; height: 200px; }
+  }
+
+
+
+  .global-map-wrap { position:relative; }
+  #world-map { width:100%; background:white; overflow:visible; position:relative; }
+  #world-map svg { width:100%; height:auto; display:block; }
+
+  /* Clean flat map style */
+  .wm-land { fill:#d0d5db; stroke:#b8bec6; stroke-width:0.6; }
+  .wm-highlight-col { fill:#ffd600 !important; stroke:#c9a800 !important; stroke-width:0.8; }
+  .wm-highlight-ca  { fill:#ffd600 !important; stroke:#c9a800 !important; stroke-width:0.8; }
+  .wm-highlight-th  { fill:#ffd600 !important; stroke:#c9a800 !important; stroke-width:0.8; }
+
+  /* Teardrop pin */
+  .wm-pin-drop { fill:#1a1a1a; }
+  .wm-pin-drop-col { fill:#ffd600; }
+  .wm-pin-inner-dot { fill:white; }
+  .wm-pin-label { fill:#111; font-family:Poppins,Arial,sans-serif; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+  .wm-pin-role  { fill:#666; font-family:Poppins,Arial,sans-serif; }
+
+  /* Callout lines */
+  .wm-callout { stroke:#999; stroke-width:1; fill:none; marker-end:url(#arrow); }
+  .wm-arc-conn { stroke:rgba(255,180,0,.45); stroke-width:1.2; stroke-dasharray:5 4; fill:none; }
+  .wm-arc-anim  { animation:wmDash 3s linear infinite; }
+  .wm-arc-anim2 { animation:wmDash 4s linear infinite reverse; }
+  @keyframes wmDash { to { stroke-dashoffset:-27; } }
+
+  /* Pulse on pins */
+  .wm-pulse { animation:wmPulse 2.5s ease-in-out infinite; transform-origin:center; }
+  .wm-pulse2 { animation:wmPulse 2.5s ease-in-out infinite; animation-delay:.8s; transform-origin:center; }
+  .wm-pulse3 { animation:wmPulse 2.5s ease-in-out infinite; animation-delay:1.6s; transform-origin:center; }
+  @keyframes wmPulse { 0%,100%{opacity:.2;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+
+  @media (max-width:768px) {
+    .global-inner { grid-template-columns:1fr; gap:40px; }
+  }
+
 </style>
 </head>
 <body>
@@ -460,7 +647,7 @@
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">
-    <div class="nav-logo-box"><img src="Studio_Bloom_on_black.png" alt="StudioBloom Logo"></div>
+    <div class="nav-logo-box"><img src="images/image_01.png" alt="StudioBloom Logo"></div>
     <div class="nav-wordmark">
       <strong>StudioBloom</strong>
       <small>Industrial Solutions</small>
@@ -492,6 +679,8 @@
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-grid"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid-lines"></div>
   <div class="hero-ticker">
     <div class="hero-ticker-inner">
       DEHYDRATION · MILLING · BIOCONTROLLERS · AGROINDUSTRIAL · AI+IOT · CALIFORNIA 2026 · DEHYDRATION · MILLING · BIOCONTROLLERS · AGROINDUSTRIAL · AI+IOT · CALIFORNIA 2026 ·&nbsp;
@@ -574,6 +763,10 @@
       </div>
     </div>
 
+    <div class="platform-img reveal d2">
+      <img src="images/image_02.jpg" alt="StudioBloom LA Industrial Equipment — Biocontrol Technology">
+    </div>
+
     <div class="platform-steps reveal d3">
       <h3>US Deployment Strategy</h3>
       <div class="astep">
@@ -587,7 +780,7 @@
         <div class="astep-num">02</div>
         <div class="astep-body">
           <strong>University Pilot Programs</strong>
-          <span>Partner with UC Davis, UC Berkeley, Stanford, Cal Poly, and UC Riverside for technical validation — building credibility through real US case studies.</span>
+          <span>Partner with UC Davis, UC Berkeley, Stanford, Cal Poly, and Cal State LA for technical validation — building credibility through real US case studies.</span>
         </div>
       </div>
       <div class="astep">
@@ -681,7 +874,36 @@
       </ul>
     </div>
   </div>
-</section>
+
+<!-- PHOTO GALLERY -->
+<div class="gallery-strip">
+  <div class="gallery-track">
+    <div class="gallery-item">
+      <img src="images/image_03.jpg" alt="Industrial Processing Unit" loading="lazy">
+      <div class="gallery-caption">Industrial Processing Unit</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/image_04.jpg" alt="Full-Scale Plant Installation" loading="lazy">
+      <div class="gallery-caption">Full-Scale Plant Installation</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/image_05.jpg" alt="Tunnel Dehydration System" loading="lazy">
+      <div class="gallery-caption">Tunnel Dehydration System</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/image_06.jpg" alt="Extraction & Separation" loading="lazy">
+      <div class="gallery-caption">Extraction & Separation</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/image_07.jpg" alt="Tank Farm & Process Control" loading="lazy">
+      <div class="gallery-caption">Tank Farm & Process Control</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/image_08.jpg" alt="Continuous Processing Line" loading="lazy">
+      <div class="gallery-caption">Continuous Processing Line</div>
+    </div>
+  </div>
+</div>
 
 <!-- BIOCONTROLLERS — HERO FEATURE -->
 <section class="biocontrol" id="biocontrol">
@@ -689,16 +911,7 @@
 
   <div class="bio-layout">
     <div class="bio-visual reveal">
-      <div class="bio-rings">
-        <div class="bio-ring"></div>
-        <div class="bio-ring"></div>
-        <div class="bio-ring"></div>
-        <div class="bio-ring"></div>
-      </div>
-      <div class="bio-center">
-        <div class="bio-center-icon">🧫</div>
-        <div class="bio-center-label">Bio<br>Controllers</div>
-      </div>
+      <img src="images/image_09.jpg" alt="StudioBloom Biocontroller System" class="bio-photo">
     </div>
 
     <div class="reveal d2">
@@ -749,6 +962,8 @@
 
   <div class="biz-grid">
     <div class="biz-card reveal d1">
+      <div class="biz-card-img"><img src="images/image_10.jpg" alt="StudioBloom Service"></div>
+      <div class="biz-card-body">
       <div class="biz-num">MODEL 2.1</div>
       <div class="biz-icon">🏗️</div>
       <div class="biz-title">Transformation Services (Maquila)</div>
@@ -760,9 +975,12 @@
         <li>Milling and pulverization</li>
         <li>By-product transformation</li>
       </ul>
+      </div>
     </div>
 
     <div class="biz-card reveal d2">
+      <div class="biz-card-img"><img src="images/image_11.jpg" alt="StudioBloom Service"></div>
+      <div class="biz-card-body">
       <div class="biz-num">MODEL 2.2</div>
       <div class="biz-icon">🔧</div>
       <div class="biz-title">Equipment Supply + Technical Service</div>
@@ -774,9 +992,12 @@
         <li>Installation and commissioning</li>
         <li>Ongoing technical support contracts</li>
       </ul>
+      </div>
     </div>
 
     <div class="biz-card reveal d3">
+      <div class="biz-card-img"><img src="images/image_12.jpg" alt="StudioBloom Service"></div>
+      <div class="biz-card-body">
       <div class="biz-num">MODEL 2.3</div>
       <div class="biz-icon">📐</div>
       <div class="biz-title">Plant Design & Implementation</div>
@@ -789,9 +1010,12 @@
         <li>Technical supervision and validation</li>
         <li>Real-world applications: agroindustrial plants</li>
       </ul>
+      </div>
     </div>
 
     <div class="biz-card reveal d4">
+      <div class="biz-card-img"><img src="images/image_13.jpg" alt="StudioBloom Service"></div>
+      <div class="biz-card-body">
       <div class="biz-num">MODEL 2.4</div>
       <div class="biz-icon">📈</div>
       <div class="biz-title">Process Optimization</div>
@@ -912,7 +1136,7 @@
         <div class="uni-item"><div class="uni-n">02</div><div class="uni-name">University of California, Berkeley</div><div class="uni-city">Berkeley, CA</div></div>
         <div class="uni-item"><div class="uni-n">03</div><div class="uni-name">Stanford University</div><div class="uni-city">Palo Alto, CA</div></div>
         <div class="uni-item"><div class="uni-n">04</div><div class="uni-name">Cal Poly State University</div><div class="uni-city">San Luis Obispo, CA</div></div>
-        <div class="uni-item"><div class="uni-n">05</div><div class="uni-name">University of California, Riverside</div><div class="uni-city">Riverside, CA</div></div>
+        <div class="uni-item"><div class="uni-n">05</div><div class="uni-name">California State University, Los Angeles</div><div class="uni-city">Los Angeles, CA</div></div>
       </div>
 
       <div style="margin-top:32px; background:var(--mid2); border:1px solid rgba(255,255,255,.08); padding:28px; border-left:3px solid var(--green);">
@@ -958,35 +1182,42 @@
 
 <!-- GLOBAL PRESENCE -->
 <section class="global-sec" id="global">
-  <div class="section-label reveal">Global Operations</div>
-  <h2 class="section-title reveal d1">Colombia<br><em>Proven.</em><br>California Next.</h2>
+  <div class="global-inner">
 
-  <div class="countries reveal d2">
-    <div class="country">
-      <div class="c-flag">🇺🇸</div>
-      <div class="c-name">USA</div>
-      <div class="c-role">Deploying 2026 · Oakland, CA</div>
+    <!-- LEFT: title + country rows -->
+    <div class="global-left">
+      <div class="section-label reveal">Global Operations</div>
+      <h2 class="section-title reveal d1">Colombia<br><em>Proven.</em><br>California Next.</h2>
+      <div class="countries-vert reveal d2">
+        <div class="country-row">
+          <div class="cr-dot"></div>
+          <div>
+            <div class="cr-name">USA — California</div>
+            <div class="cr-role">Deploying 2026 · HQ Oakland, CA</div>
+          </div>
+        </div>
+        <div class="country-row">
+          <div class="cr-dot"></div>
+          <div>
+            <div class="cr-name">Colombia</div>
+            <div class="cr-role">Technology Origin · Proven Model</div>
+          </div>
+        </div>
+        <div class="country-row">
+          <div class="cr-dot cr-dot-sm"></div>
+          <div>
+            <div class="cr-name">Thailand</div>
+            <div class="cr-role">Technology Implementations</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="country">
-      <div class="c-flag">🇨🇴</div>
-      <div class="c-name">Colombia</div>
-      <div class="c-role">Technology Origin · Proven Model</div>
+
+    <!-- RIGHT: world map -->
+    <div class="global-map-wrap reveal d2">
+      <div id="world-map"></div>
     </div>
-    <div class="country">
-      <div class="c-flag">🌐</div>
-      <div class="c-name">Country 3</div>
-      <div class="c-role">Active Operations</div>
-    </div>
-    <div class="country">
-      <div class="c-flag">🌐</div>
-      <div class="c-name">Country 4</div>
-      <div class="c-role">Active Operations</div>
-    </div>
-    <div class="country">
-      <div class="c-flag">🌐</div>
-      <div class="c-name">Country 5</div>
-      <div class="c-role">Active Operations</div>
-    </div>
+
   </div>
 </section>
 
@@ -1091,6 +1322,183 @@
       document.body.style.overflow = '';
     });
   });
+
+  // GALLERY DRAG SCROLL
+  const track = document.querySelector('.gallery-track');
+  if (track) {
+    let isDown = false, startX, scrollLeft;
+    track.addEventListener('mousedown', e => {
+      isDown = true; track.classList.add('grabbing');
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+    track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('grabbing'); });
+    track.addEventListener('mouseup', () => { isDown = false; track.classList.remove('grabbing'); });
+    track.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+    });
+  }
+
+
+
+
+
+
+  // WORLD MAP — D3 + TopoJSON proper world map
+  (function() {
+    const el = document.getElementById('world-map');
+    if (!el) return;
+
+    // Load D3 and TopoJSON dynamically
+    function loadScript(src, cb) {
+      const s = document.createElement('script');
+      s.src = src; s.onload = cb;
+      document.head.appendChild(s);
+    }
+
+    function drawMap() {
+      const W = el.offsetWidth || 700;
+      const H = Math.round(W * 0.52);
+      el.style.height = H + 'px';
+
+      const H2 = Math.round(H * 0.84); // clip bottom to hide Antarctica
+      el.style.height = H2 + 'px';
+      const svg = d3.select('#world-map').append('svg')
+        .attr('width', W).attr('height', H2)
+        .attr('viewBox', `0 0 ${W} ${H2}`);
+
+      // White background
+      svg.append('rect').attr('width', W).attr('height', H).attr('fill', 'white');
+
+      const projection = d3.geoNaturalEarth1()
+        .scale(W / 6.5)
+        .translate([W / 2, H / 2]);
+
+      // Clip to remove Antarctica — limit southern extent to ~-60 lat
+      const clipRect = [[-1, -1], [W + 1, H * 0.85]];
+
+      const path = d3.geoPath().projection(projection);
+
+      // Highlights: [name_in_data, css_class]
+      const highlights = {
+        'Colombia': 'wm-highlight-col',
+        'United States of America': 'wm-highlight-ca-country',
+        'Thailand': 'wm-highlight-th',
+      };
+
+      // California polygon (approximate, drawn separately)
+      const californiaGeo = {
+        type: 'Feature',
+        geometry: {
+          type: 'Polygon',
+          coordinates: [[
+            [-124.4, 42.0],[-120.0, 42.0],[-120.0, 39.0],[-117.1, 32.5],
+            [-114.6, 32.7],[-114.7, 34.0],[-117.7, 34.0],[-118.5, 34.1],
+            [-120.5, 34.5],[-122.4, 37.7],[-124.0, 40.5],[-124.4, 42.0]
+          ]]
+        }
+      };
+
+      fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+        .then(r => r.json())
+        .then(world => {
+          const countries = topojson.feature(world, world.objects.countries);
+
+          // Country name lookup from a simple id→name map
+          // We'll color by drawing all countries first, then highlights
+          svg.selectAll('.wm-country')
+            .data(countries.features.filter(f => f.id !== '010')) // exclude Antarctica
+            .enter().append('path')
+            .attr('class', 'wm-land')
+            .attr('d', path);
+
+          // Draw California highlight ON TOP
+          svg.append('path')
+            .datum(californiaGeo)
+            .attr('class', 'wm-land wm-highlight-ca')
+            .attr('d', path);
+
+          // Colombia — find by coordinates roughly (id 170)
+          const colombia = countries.features.find(f => f.id === '170');
+          if (colombia) {
+            svg.append('path').datum(colombia)
+              .attr('class', 'wm-land wm-highlight-col').attr('d', path);
+          }
+
+          // Thailand (id 764)
+          const thailand = countries.features.find(f => f.id === '764');
+          if (thailand) {
+            svg.append('path').datum(thailand)
+              .attr('class', 'wm-land wm-highlight-th').attr('d', path);
+          }
+
+          drawPinsAndArcs(svg, projection, W, H);
+        })
+        .catch(err => {
+          console.error('Map load failed:', err);
+          el.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;font-size:12px;letter-spacing:.1em;">MAP LOADING...</div>';
+        });
+    }
+
+    function drawPinsAndArcs(svg, projection, W, H) {
+      const pins = [
+        { lon:-74.1, lat:4.7,   label:'COLOMBIA',   role:'Technology Origin',  color:'#ffd600', textSide:1 },
+        { lon:-119.5, lat:36.8, label:'CALIFORNIA',  role:'Deploying 2026',     color:'#111',    textSide:-1 },
+        { lon:100.5, lat:13.7,  label:'THAILAND',    role:'Technology Implementations',  color:'#111',    textSide:-1 },
+      ];
+
+      const coords = pins.map(p => projection([p.lon, p.lat]));
+
+      // Dashed arcs
+      [[0,1],[0,2]].forEach(([a,b], i) => {
+        const [ax,ay] = coords[a], [bx,by] = coords[b];
+        const mx = (ax+bx)/2, my = Math.min(ay,by) - 40;
+        svg.append('path')
+          .attr('d', `M${ax},${ay} Q${mx},${my} ${bx},${by}`)
+          .attr('class', 'wm-arc-conn ' + (i===0?'wm-arc-anim':'wm-arc-anim2'));
+      });
+
+      // Teardrop pins
+      pins.forEach((pin, i) => {
+        const [px, py] = coords[i];
+        const g = svg.append('g').attr('transform', `translate(${px},${py})`);
+
+        // Pulse circle
+        g.append('circle').attr('r', 12)
+          .attr('fill', pin.color).attr('opacity', .2)
+          .style('animation', `wmPulse 2.4s ease-in-out infinite`)
+          .style('animation-delay', `${i*0.8}s`);
+
+        // Teardrop path
+        g.append('path')
+          .attr('d', 'M0,8 C-8,8 -8,0 -8,-8 A8,8 0 1,1 8,-8 C8,0 8,8 0,8 Z')
+          .attr('fill', pin.color)
+          .attr('stroke', 'white').attr('stroke-width', 1.5);
+
+        // Inner dot
+        g.append('circle').attr('cx',0).attr('cy',-8).attr('r',3)
+          .attr('fill','white');
+
+        // Label
+        const lx = pin.textSide * 16;
+        const anchor = pin.textSide > 0 ? 'start' : 'end';
+        g.append('text').attr('x', lx).attr('y', -18)
+          .attr('text-anchor', anchor).attr('font-size', 9)
+          .attr('class', 'wm-pin-label').text(pin.label);
+        g.append('text').attr('x', lx).attr('y', -7)
+          .attr('text-anchor', anchor).attr('font-size', 7.5)
+          .attr('class', 'wm-pin-role').text(pin.role);
+      });
+    }
+
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js', () => {
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js', drawMap);
+    });
+  })();
+
 </script>
 </body>
 </html>
