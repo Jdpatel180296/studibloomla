@@ -1,0 +1,17 @@
+{
+  "name": "studibloomla",
+  "version": "1.0.0",
+  "description": "StudioBloom Industrial Solutions Website",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build needed'",
+    "lint": "echo 'No linting configured'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^1.1.1"
+  }
+}
