@@ -288,6 +288,11 @@
 
   /* TARGETS */
   .targets { background:var(--black); border-top:1px solid rgba(255,255,255,.07); }
+  .targets-header { display:grid; grid-template-columns:1fr .95fr; gap:48px; align-items:end; }
+  .targets-hero-image { border:1px solid rgba(255,255,255,.08); background:var(--gray); overflow:hidden; position:relative; min-height:260px; }
+  .targets-hero-image img { width:100%; height:100%; min-height:260px; object-fit:cover; object-position:center; display:block; filter:saturate(.9) contrast(1.05); transition:transform .6s cubic-bezier(.25,.46,.45,.94), filter .4s; }
+  .targets-hero-image:hover img { transform:scale(1.03); filter:saturate(1) contrast(1.1); }
+  .targets-hero-image::after { content:''; position:absolute; inset:0; background:linear-gradient(to bottom, transparent 55%, rgba(0,0,0,.35) 100%); pointer-events:none; }
   .targets-layout { display:grid; grid-template-columns:1fr 1.6fr; gap:80px; margin-top:72px; }
   .target-types { display:flex; flex-direction:column; gap:2px; }
   .target-type { background:var(--gray); border:1px solid rgba(255,255,255,.06); padding:28px; transition:background .2s; cursor:none; }
@@ -475,6 +480,9 @@
   .biz-price { text-align:left; }
 
     /* TARGETS */
+    .targets-header { grid-template-columns: 1fr; gap: 28px; }
+    .targets-hero-image { min-height: 220px; }
+    .targets-hero-image img { min-height: 220px; }
     .targets-layout { grid-template-columns: 1fr; gap: 40px; }
     .cos-grid { grid-template-columns: 1fr; }
 
@@ -1033,8 +1041,15 @@
 
 <!-- TARGET CLIENTS -->
 <section class="targets" id="targets">
-  <div class="section-label reveal">Target Market</div>
-  <h2 class="section-title reveal d1">California's<br><em>Agroindustrial</em><br>Leaders</h2>
+  <div class="targets-header">
+    <div>
+      <div class="section-label reveal">Target Market</div>
+      <h2 class="section-title reveal d1">California's<br><em>Agroindustrial</em><br>Leaders</h2>
+    </div>
+    <div class="targets-hero-image reveal d2">
+      <img src="images/Agro_image.jpg" alt="California farmland with crop rows and mountains in the background">
+    </div>
+  </div>
 
   <div class="targets-layout">
     <div>
